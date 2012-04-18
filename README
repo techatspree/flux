@@ -1,0 +1,8 @@
+
+Flux is a project consolidating our experiences with jBPM5 in a Java EE 6 environment. 
+
+It is a small CDI module where all aspects described in our appertaining blog post (http://blog.akquinet.de/2012/04/13/use-jbpm5-embedded-within-a-java-ee-6-application/) and other additional aspects like the integration of the TaskService are covered. With this CDI module you can easily embed jBPM5 in your web application and use arbitrary process definitions. 
+
+Currently we are planning and designing the support of a business scope and a forge plugin for generating code from a process definition. The aim of the generator is to take a particular process definition and to generate all needed artifacts like WorkItemHandlers or Forms using the Flux API. A blog post and a tutorial for our framework will follow.
+
+The first demo version will be published soon...
