@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s="urn:java:ee"
+  xmlns:sec="urn:java:org.jboss.seam.security">
+
+  <sec:SecurityEventMessages>
+    <s:modifies />
+    <sec:enabled>false</sec:enabled>
+  </sec:SecurityEventMessages>
+
+  <sec:IdentityImpl>
+    <s:modifies />
+    <sec:authenticatorName>myHolidayAuthenticator</sec:authenticatorName>
+  </sec:IdentityImpl>
+  
+</beans>

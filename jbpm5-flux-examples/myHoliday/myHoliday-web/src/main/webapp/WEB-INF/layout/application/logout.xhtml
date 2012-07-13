@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:fragment>
+		<div id="logout" style="padding-top:2px;padding-bottom:2px;padding-left:10px;">
+			<h:form id="logOutForm"  style="padding:0px;">
+				#{userPermissionController.userName} <h:commandLink id="logoutButton" action="#{identity.logout}" value="#{messages['myHoliday.securityController.logout.button']}" />
+			</h:form>	
+		</div>
+	</ui:fragment>
+
+</ui:composition>

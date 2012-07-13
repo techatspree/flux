@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>myHoliday</artifactId>
+    <groupId>de.akquinet</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>myHoliday-web</artifactId>
+  <packaging>war</packaging>
+  <name>myHoliday - Web Application Archive</name>
+
+  <properties>
+    <project.base.dir>${project.parent.basedir}</project.base.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- JEE 6 Spec -->
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-6.0</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <!-- myHoliday Dependencies -->
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-business</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-process</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-domain</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+      <artifactId>jbpm5-flux-bpmservice</artifactId>
+    </dependency>
+
+    <!-- JSF -->
+    <dependency>
+      <groupId>org.richfaces.ui</groupId>
+      <artifactId>richfaces-components-ui</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.core</groupId>
+      <artifactId>richfaces-core-impl</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Seam -->
+    <!-- http://seamframework.org/Seam3/FacesModule -->
+    <dependency>
+      <groupId>org.jboss.seam.solder</groupId>
+      <artifactId>seam-solder</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.seam.security</groupId>
+      <artifactId>seam-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.seam.faces</groupId>
+      <artifactId>seam-faces</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.seam.config</groupId>
+      <artifactId>seam-config-xml</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.seam.catch</groupId>
+      <artifactId>seam-catch</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.seam.validation</groupId>
+      <artifactId>seam-validation</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.ocpsoft</groupId>
+      <artifactId>ocpsoft-pretty-time</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.ocpsoft</groupId>
+      <artifactId>prettyfaces-jsf2</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- seam benötigt auch joda-time (z.B. seam-faces und seam-securoty) -->
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <finalName>myHoliday</finalName>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+
+    <!-- Per Default (Entwicklungsphase) ist dieses Profil aktiviert. Dieses Profil bindet das Bootstrap-Modul ein. -->
+    <!-- Um das Bootstrap-Modul vom WAR auszuschließen, muss an den Maven-Build eine System-Property übergeben werden. Der 
+      Aufruf muss wie folgt aussehen: $mvn package -Dbootstrap.exclude -->
+    <!-- http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
+    <profile>
+      <id>bootstrap_include</id>
+      <activation>
+        <property>
+          <name>!bootstrap.exclude</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>de.akquinet</groupId>
+          <artifactId>myHoliday-bootstrap</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>taskserver_local</id>
+      <activation>
+        <property>
+          <name>taskserver.local</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+          <artifactId>jbpm5-flux-taskserver-local</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>taskserver_mina</id>
+      <activation>
+        <property>
+          <name>taskserver.mina</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+          <artifactId>jbpm5-flux-taskserver-mina</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+
+  </profiles>
+
+
+</project>

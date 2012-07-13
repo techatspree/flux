@@ -1,0 +1,65 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/layout/application/main-template.xhtml">
+
+	<ui:define name="content">
+		<h:form id="dataForm">	
+			<h:panelGroup layout="block">
+				<rich:dataTable id="taskDataTable" value="#{taskManagementController.dataModel}" var="task" iterationStatusVar="it"
+						style="width:100%;">					
+					<rich:column id="taskNameColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.taskContainer.name.title']}" />
+						</f:facet>
+						<h:outputText value="#{task.name}" />
+					</rich:column>									
+					
+					<rich:column id="stateColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.taskContainer.status.title']}" />											
+						</f:facet>
+						<h:outputText value="#{task.status}" />
+					</rich:column>	
+					
+					<rich:column id="acturalOwnerColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.taskContainer.actualOwner.title']}" />
+						</f:facet>
+						<h:outputText value="#{task.actualOwner.id}" />
+					</rich:column>
+					<rich:column id="infoColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.taskContainer.info.title']}" />
+						</f:facet>
+						<h:outputText value="#{task.info}" />
+					</rich:column>					
+					<rich:column id="executeColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.taskManagementController.startTask.title']}" />
+						</f:facet>
+	
+						<a4j:commandButton actionListener="#{taskManagementController.startTask}"
+							render="taskDetailIformation,taskDataTable"
+							execute="@this" value="#{messages['myHoliday.taskManagementController.startTask.button']}" />
+					</rich:column>							
+				</rich:dataTable>	
+			</h:panelGroup>
+				
+			<h:panelGroup id="taskDetailIformation" layout="block" style="padding-top:15px;">
+				<h:panelGroup rendered="#{taskManagementController.taskSelected}" id="taskSelected">
+					<ui:include src="/WEB-INF/pages/taskforms/#{taskManagementController.taskFormName}" />
+				</h:panelGroup>
+				<h:panelGroup rendered="#{not taskManagementController.taskSelected}" id="taskNotSelected">
+					<h:outputText value="#{messages['myHoliday.taskManagementController.noTaskSelected.title']}" />
+				</h:panelGroup>				
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

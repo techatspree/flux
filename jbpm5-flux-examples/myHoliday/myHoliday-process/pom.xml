@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>myHoliday</artifactId>
+    <groupId>de.akquinet</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>myHoliday-process</artifactId>
+  <name>myHoliday - Process integration</name>
+  <description>myHoliday process integration</description>
+
+  <properties>
+    <project.base.dir>${project.parent.basedir}</project.base.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.spec</groupId>
+      <artifactId>jboss-javaee-6.0</artifactId>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-domain</artifactId>
+      <type>test-jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-dao</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-dao</artifactId>
+      <type>test-jar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet</groupId>
+      <artifactId>myHoliday-business</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+      <artifactId>jbpm5-flux-bpmservice</artifactId>
+    </dependency>
+
+  </dependencies>
+  
+  <profiles>
+    <profile>
+      <id>taskserver_local</id>
+      <activation>
+        <property>
+          <name>taskserver.local</name>
+        </property>
+      </activation>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/common</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources/taskserver_local</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+    
+    <profile>
+      <id>taskserver_mina</id>
+       <activation>
+        <property>
+          <name>taskserver.mina</name>
+        </property>
+      </activation>
+      <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources/common</directory>
+          </resource>
+          <resource>
+            <directory>src/main/resources/taskserver_mina</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+      </build>
+    </profile>
+  </profiles>
+  
+</project>

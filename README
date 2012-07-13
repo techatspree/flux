@@ -5,4 +5,21 @@ It is a small CDI module where all aspects described in our appertaining blog po
 
 Currently we are planning and designing the support of a business scope and a forge plugin for generating code from a process definition. The aim of the generator is to take a particular process definition and to generate all needed artifacts like WorkItemHandlers or Forms using the Flux API. A blog post and a tutorial for our framework will follow.
 
-The first demo version will be published soon...
+This is our first public version of the Flux project which uses the latest jbpm5.4-Snapshot and drools5.5-Snapshots.
+
+Have a look on our example jee6 web application. The example will show you, how to use jbpm5-flux for developing a web application.
+
+A documentation will be published soon as possible...
+
+Quickstart:
+1. build jbpm5-flux with maven: mvn install
+
+2. build myHoliday with maven:
+2.A use myHoliday with localTaskService: mvn install -Dtaskserver.local
+2.B use myHoliday with TaskService with Mina implementation: mvn install -Dtaskserver.mina
+
+3. Deploy on JBoss AS 7
+3.A Use JBoss AS 7.1 with the LocalTaskService
+3.B Use JBoss AS 7.0 with the MinaTaskService
+
+4. Start the Server and go to: http://localhost:8080/myHoliday/

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_acceptedItem" structureRef="Boolean" />
+  <itemDefinition id="_daysItem" structureRef="Integer" />
+  <itemDefinition id="_applicantItem" structureRef="String" />
+  <itemDefinition id="_holiday_startItem" structureRef="java.util.Date" />
+  <itemDefinition id="_holiday_endItem" structureRef="java.util.Date" />
+  <itemDefinition id="_substitutionItem" structureRef="String" />
+  <itemDefinition id="_holidayItem" />
+
+  <process processType="Private" isExecutable="true" id="de.akquinet.myholiday.requestForLeave" name="requestForLeave" tns:packageName="de.akquinet.myholiday" tns:version="1" >
+
+    <!-- process variables -->
+    <property id="accepted" itemSubjectRef="_acceptedItem"/>
+    <property id="days" itemSubjectRef="_daysItem"/>
+    <property id="applicant" itemSubjectRef="_applicantItem"/>
+    <property id="holiday_start" itemSubjectRef="_holiday_startItem"/>
+    <property id="holiday_end" itemSubjectRef="_holiday_endItem"/>
+    <property id="substitution" itemSubjectRef="_substitutionItem"/>
+    <property id="holiday" itemSubjectRef="_holidayItem"/>
+
+    <!-- nodes -->
+    <task id="_17" name="create holiday" tns:taskName="create holiday" >
+      <ioSpecification>
+        <dataInput id="_17_holiday_startInput" name="holiday_start" />
+        <dataInput id="_17_holiday_endInput" name="holiday_end" />
+        <dataInput id="_17_applicantInput" name="applicant" />
+        <dataOutput id="_17_holidayOutput" name="holiday" />
+        <dataOutput id="_17_daysOutput" name="days" />
+        <inputSet>
+          <dataInputRefs>_17_holiday_startInput</dataInputRefs>
+          <dataInputRefs>_17_holiday_endInput</dataInputRefs>
+          <dataInputRefs>_17_applicantInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_17_holidayOutput</dataOutputRefs>
+          <dataOutputRefs>_17_daysOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>holiday_start</sourceRef>
+        <targetRef>_17_holiday_startInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>holiday_end</sourceRef>
+        <targetRef>_17_holiday_endInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>applicant</sourceRef>
+        <targetRef>_17_applicantInput</targetRef>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_17_holidayOutput</sourceRef>
+        <targetRef>holiday</targetRef>
+      </dataOutputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_17_daysOutput</sourceRef>
+        <targetRef>days</targetRef>
+      </dataOutputAssociation>
+    </task>
+    <exclusiveGateway id="_16" name="Gateway" gatewayDirection="Converging" />
+    <startEvent id="_1" name="StartProcess" />
+    <userTask id="_2" name="request for leave" >
+      <ioSpecification>
+        <dataInput id="_2_CommentInput" name="Comment" />
+        <dataInput id="_2_SkippableInput" name="Skippable" />
+        <dataInput id="_2_TaskNameInput" name="TaskName" />
+        <dataOutput id="_2_holiday_startOutput" name="holiday_start" />
+        <dataOutput id="_2_holiday_endOutput" name="holiday_end" />
+        <inputSet>
+          <dataInputRefs>_2_CommentInput</dataInputRefs>
+          <dataInputRefs>_2_SkippableInput</dataInputRefs>
+          <dataInputRefs>_2_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_2_holiday_startOutput</dataOutputRefs>
+          <dataOutputRefs>_2_holiday_endOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_2_CommentInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Requenst for leave</from>
+          <to xsi:type="tFormalExpression">_2_CommentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_2_SkippableInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">false</from>
+          <to xsi:type="tFormalExpression">_2_SkippableInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_2_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">request for leave</from>
+          <to xsi:type="tFormalExpression">_2_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_2_holiday_startOutput</sourceRef>
+        <targetRef>holiday_start</targetRef>
+      </dataOutputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_2_holiday_endOutput</sourceRef>
+        <targetRef>holiday_end</targetRef>
+      </dataOutputAssociation>
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>#{applicant}</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+    <userTask id="_3" name="check request for leave" >
+      <ioSpecification>
+        <dataInput id="_3_holiday_startInput" name="holiday_start" />
+        <dataInput id="_3_holiday_endInput" name="holiday_end" />
+        <dataInput id="_3_applicantInput" name="applicant" />
+        <dataInput id="_3_CommentInput" name="Comment" />
+        <dataInput id="_3_SkippableInput" name="Skippable" />
+        <dataInput id="_3_TaskNameInput" name="TaskName" />
+        <dataInput id="_3_GroupIdInput" name="GroupId" />
+        <dataOutput id="_3_acceptedOutput" name="accepted" />
+        <inputSet>
+          <dataInputRefs>_3_holiday_startInput</dataInputRefs>
+          <dataInputRefs>_3_holiday_endInput</dataInputRefs>
+          <dataInputRefs>_3_applicantInput</dataInputRefs>
+          <dataInputRefs>_3_CommentInput</dataInputRefs>
+          <dataInputRefs>_3_SkippableInput</dataInputRefs>
+          <dataInputRefs>_3_TaskNameInput</dataInputRefs>
+          <dataInputRefs>_3_GroupIdInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_3_acceptedOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>holiday_start</sourceRef>
+        <targetRef>_3_holiday_startInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>holiday_end</sourceRef>
+        <targetRef>_3_holiday_endInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>applicant</sourceRef>
+        <targetRef>_3_applicantInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_CommentInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Check request for leave for #{applicant}</from>
+          <to xsi:type="tFormalExpression">_3_CommentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_SkippableInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">false</from>
+          <to xsi:type="tFormalExpression">_3_SkippableInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">check request for leave</from>
+          <to xsi:type="tFormalExpression">_3_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_GroupIdInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">administration</from>
+          <to xsi:type="tFormalExpression">_3_GroupIdInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_3_acceptedOutput</sourceRef>
+        <targetRef>accepted</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <task id="_18" name="update holiday" tns:taskName="update holiday" >
+      <ioSpecification>
+        <dataInput id="_18_holidayInput" name="holiday" />
+        <inputSet>
+          <dataInputRefs>_18_holidayInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>holiday</sourceRef>
+        <targetRef>_18_holidayInput</targetRef>
+      </dataInputAssociation>
+    </task>
+    <userTask id="_5" name="select substitution" >
+      <ioSpecification>
+        <dataInput id="_5_holidayInput" name="holiday" />
+        <dataInput id="_5_CommentInput" name="Comment" />
+        <dataInput id="_5_SkippableInput" name="Skippable" />
+        <dataInput id="_5_TaskNameInput" name="TaskName" />
+        <dataInput id="_5_GroupIdInput" name="GroupId" />
+        <dataOutput id="_5_holidayOutput" name="holiday" />
+        <dataOutput id="_5_substitutionOutput" name="substitution" />
+        <inputSet>
+          <dataInputRefs>_5_holidayInput</dataInputRefs>
+          <dataInputRefs>_5_CommentInput</dataInputRefs>
+          <dataInputRefs>_5_SkippableInput</dataInputRefs>
+          <dataInputRefs>_5_TaskNameInput</dataInputRefs>
+          <dataInputRefs>_5_GroupIdInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_5_holidayOutput</dataOutputRefs>
+          <dataOutputRefs>_5_substitutionOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>holiday</sourceRef>
+        <targetRef>_5_holidayInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_5_CommentInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Select substitution for #{applicant}</from>
+          <to xsi:type="tFormalExpression">_5_CommentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_5_SkippableInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">false</from>
+          <to xsi:type="tFormalExpression">_5_SkippableInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_5_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">select substitution</from>
+          <to xsi:type="tFormalExpression">_5_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_5_GroupIdInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">administration</from>
+          <to xsi:type="tFormalExpression">_5_GroupIdInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_5_holidayOutput</sourceRef>
+        <targetRef>holiday</targetRef>
+      </dataOutputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_5_substitutionOutput</sourceRef>
+        <targetRef>substitution</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <userTask id="_7" name="confirm answer" >
+      <ioSpecification>
+        <dataInput id="_7_holidayInput" name="holiday" />
+        <dataInput id="_7_acceptedInput" name="accepted" />
+        <dataInput id="_7_CommentInput" name="Comment" />
+        <dataInput id="_7_SkippableInput" name="Skippable" />
+        <dataInput id="_7_TaskNameInput" name="TaskName" />
+        <inputSet>
+          <dataInputRefs>_7_holidayInput</dataInputRefs>
+          <dataInputRefs>_7_acceptedInput</dataInputRefs>
+          <dataInputRefs>_7_CommentInput</dataInputRefs>
+          <dataInputRefs>_7_SkippableInput</dataInputRefs>
+          <dataInputRefs>_7_TaskNameInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>holiday</sourceRef>
+        <targetRef>_7_holidayInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>accepted</sourceRef>
+        <targetRef>_7_acceptedInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_7_CommentInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">Confirm answer</from>
+          <to xsi:type="tFormalExpression">_7_CommentInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_7_SkippableInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">false</from>
+          <to xsi:type="tFormalExpression">_7_SkippableInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_7_TaskNameInput</targetRef>
+        <assignment>
+          <from xsi:type="tFormalExpression">confirm answer</from>
+          <to xsi:type="tFormalExpression">_7_TaskNameInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>#{applicant}</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+    <endEvent id="_8" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <exclusiveGateway id="_10" name="Gateway" gatewayDirection="Diverging" />
+    <exclusiveGateway id="_11" name="Gateway" gatewayDirection="Converging" />
+    <exclusiveGateway id="_15" name="Gateway" gatewayDirection="Diverging" />
+
+    <!-- connections -->
+    <sequenceFlow id="_10-_17" sourceRef="_10" targetRef="_17" name="accepted" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return accepted;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_10-_16" sourceRef="_10" targetRef="_16" name="not accepted" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return !accepted;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_15-_16" sourceRef="_15" targetRef="_16" name="days &lt;= 3" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (days &lt;= 3);</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_2-_3" sourceRef="_2" targetRef="_3" />
+    <sequenceFlow id="_5-_18" sourceRef="_5" targetRef="_18" />
+    <sequenceFlow id="_15-_5" sourceRef="_15" targetRef="_5" name="days &gt; 3" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return (days &gt; 3);</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_11-_7" sourceRef="_11" targetRef="_7" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+    <sequenceFlow id="_3-_10" sourceRef="_3" targetRef="_10" />
+    <sequenceFlow id="_16-_11" sourceRef="_16" targetRef="_11" />
+    <sequenceFlow id="_18-_11" sourceRef="_18" targetRef="_11" />
+    <sequenceFlow id="_17-_15" sourceRef="_17" targetRef="_15" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="de.akquinet.myholiday.requestForLeave" >
+      <bpmndi:BPMNShape bpmnElement="_17" >
+        <dc:Bounds x="444" y="288" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_16" >
+        <dc:Bounds x="576" y="48" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="12" y="48" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="84" y="48" width="123" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="228" y="168" width="169" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_18" >
+        <dc:Bounds x="816" y="288" width="133" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="672" y="168" width="121" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="1008" y="48" width="145" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="1176" y="48" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" >
+        <dc:Bounds x="408" y="168" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" >
+        <dc:Bounds x="936" y="48" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_15" >
+        <dc:Bounds x="576" y="168" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_10-_17" >
+        <di:waypoint x="432" y="192" />
+        <di:waypoint x="432" y="313" />
+        <di:waypoint x="494" y="312" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10-_16" >
+        <di:waypoint x="432" y="192" />
+        <di:waypoint x="432" y="72" />
+        <di:waypoint x="600" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_15-_16" >
+        <di:waypoint x="600" y="192" />
+        <di:waypoint x="600" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="36" y="72" />
+        <di:waypoint x="145" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_3" >
+        <di:waypoint x="145" y="72" />
+        <di:waypoint x="214" y="72" />
+        <di:waypoint x="214" y="195" />
+        <di:waypoint x="312" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_18" >
+        <di:waypoint x="732" y="192" />
+        <di:waypoint x="804" y="192" />
+        <di:waypoint x="805" y="312" />
+        <di:waypoint x="882" y="312" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_15-_5" >
+        <di:waypoint x="600" y="192" />
+        <di:waypoint x="732" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_7" >
+        <di:waypoint x="960" y="72" />
+        <di:waypoint x="1080" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="1080" y="72" />
+        <di:waypoint x="1200" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_10" >
+        <di:waypoint x="312" y="192" />
+        <di:waypoint x="432" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_16-_11" >
+        <di:waypoint x="600" y="72" />
+        <di:waypoint x="960" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_18-_11" >
+        <di:waypoint x="882" y="312" />
+        <di:waypoint x="961" y="310" />
+        <di:waypoint x="960" y="72" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_17-_15" >
+        <di:waypoint x="494" y="312" />
+        <di:waypoint x="564" y="313" />
+        <di:waypoint x="562" y="192" />
+        <di:waypoint x="600" y="192" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

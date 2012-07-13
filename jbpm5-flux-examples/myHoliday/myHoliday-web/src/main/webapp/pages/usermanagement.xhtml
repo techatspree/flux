@@ -1,0 +1,73 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/layout/application/main-template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<h:panelGroup layout="block">
+				<rich:dataTable id="userAccountDataTable" var="userAccount"
+					value="#{userAccountListController.dataModel}">
+					<rich:column id="idColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.userAccount.id.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.id}" />
+					</rich:column>
+
+					<rich:column id="userNameColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.userAccount.userName.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.userName}" />
+					</rich:column>
+
+					<rich:column id="firstNameColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.userAccount.firstName.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.firstName}" />
+					</rich:column>
+
+					<rich:column id="lastNameColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.userAccount.lastName.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.lastName}" />
+					</rich:column>
+
+					<rich:column id="eMailColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.userAccount.eMail.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.eMail}" />
+					</rich:column>
+					
+					<rich:column id="phoneNumberColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.userAccount.phoneNumber.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.phoneNumber}" />
+					</rich:column>	
+					
+					<rich:column id="roleColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.accountRole.title']}" />
+						</f:facet>
+						<h:outputText value="#{userAccount.userAccountRolesAsString}" />
+					</rich:column>						
+				</rich:dataTable>	
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

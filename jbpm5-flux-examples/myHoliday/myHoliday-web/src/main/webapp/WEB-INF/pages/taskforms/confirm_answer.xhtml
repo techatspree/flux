@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/layout/taskform/taskdetailiformation-template.xhtml">
+	
+	<ui:define name="taskFormName">
+		<h:outputText value="#{taskManagementController.taskFormData.formDisplayName}" />
+	</ui:define>
+	
+	<ui:define name="taskInformationInputArea">
+		<h:panelGrid id="userAcountDataGrid" columns="2" rendered="#{taskManagementController.taskFormData.accepted}">
+			<h:outputText value="Urlaub:" />
+			<h:outputText value="JA" />
+					
+			<h:outputText value="Start:" />
+			<rich:calendar value="#{taskManagementController.taskFormData.holiday.startDate}" readonly="true"
+				locale="de/DE"
+				popup="true"
+				datePattern="dd.MM.yyyy"
+				enableManualInput="true"
+				showApplyButton="true"                     
+				cellWidth="24px" cellHeight="22px" style="width:200px"/>		
+			
+			<h:outputText value="Ende:" />
+			<rich:calendar value="#{taskManagementController.taskFormData.holiday.endDate}" readonly="true"
+				locale="de/DE"
+				popup="true"
+				datePattern="dd.MM.yyyy"
+				enableManualInput="true"
+				showApplyButton="true"                     
+				cellWidth="24px" cellHeight="22px" style="width:200px"/>
+			
+			<h:outputText value="Dauer:" />
+			<h:inputText value="#{taskManagementController.taskFormData.time}" readonly="true" />				
+		</h:panelGrid>
+		
+	</ui:define>
+</ui:composition>
+

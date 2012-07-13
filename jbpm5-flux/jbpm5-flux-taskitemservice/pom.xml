@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>jbpm5-flux</artifactId>
+		<groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jbpm5-flux-taskitemservice</artifactId>
+	<name>jBPM 5 Flux - TaskItem Service</name>
+	<description>Task-Item-Service</description>
+
+	<properties>
+		<project.base.dir>${project.parent.basedir}</project.base.dir>
+	</properties>
+
+
+	<dependencies>
+	
+		<dependency>
+			<artifactId>jbpm5-flux-bom</artifactId>
+			<groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<type>pom</type>
+		</dependency>
+		
+		<!-- for Arquillian start -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+		</dependency>
+		<!-- for Arquillian end -->
+	</dependencies>
+
+</project>

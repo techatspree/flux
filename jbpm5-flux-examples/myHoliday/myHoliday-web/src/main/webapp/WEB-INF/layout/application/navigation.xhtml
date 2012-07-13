@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:fragment> 
+		<div id="navigation" style="padding:0px;">
+			<h:form style="padding:0px;">			
+				<div class="navigation" style="background-color:lightGray;padding:5px;">
+				
+					<h:panelGroup>
+						<h:panelGroup
+							rendered="#{navigationController.optionStyleUrlaubsantrag == 'selected'}">
+							<li class="item #{navigationController.optionStyleUrlaubsantrag}">
+								<h:outputText styleClass="text" value="#{messages['myHoliday.navigationController.processSite.button']}" />
+							</li>
+						</h:panelGroup>
+						<h:link outcome="/pages/processmanagement.seam"
+							rendered="#{navigationController.optionStyleUrlaubsantrag != 'selected'}">
+							<li class="item #{navigationController.optionStyleUrlaubsantrag}">
+								<div class="text">#{messages['myHoliday.navigationController.processSite.button']}</div>
+							</li>
+						</h:link>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:panelGroup
+							rendered="#{navigationController.optionStyleAufgaben == 'selected'}">
+							<li class="item #{navigationController.optionStyleAufgaben}">
+								<h:outputText styleClass="text" value="#{messages['myHoliday.navigationController.taskSite.button']}" />
+							</li>
+						</h:panelGroup>
+						<h:link outcome="/pages/taskmanagement.seam"
+							rendered="#{navigationController.optionStyleAufgaben != 'selected'}">
+							<li class="item #{navigationController.optionStyleAufgaben}">
+								<div class="text">#{messages['myHoliday.navigationController.taskSite.button']}</div>
+							</li>
+						</h:link>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:panelGroup
+							rendered="#{navigationController.optionStyleUsers == 'selected'}">
+							<li class="item #{navigationController.optionStyleUsers}">
+								<h:outputText styleClass="text" value="#{messages['myHoliday.navigationController.userSite.button']}" />
+							</li>
+						</h:panelGroup>
+						<h:link outcome="/pages/usermanagement.seam"
+							rendered="#{navigationController.optionStyleUsers != 'selected'}">
+							<li class="item #{navigationController.optionStyleUsers}">
+								<div class="text">#{messages['myHoliday.navigationController.userSite.button']}</div>
+							</li>
+						</h:link>
+					</h:panelGroup>
+				
+					<h:panelGroup>
+						<h:panelGroup
+							rendered="#{navigationController.optionStyleHolidays == 'selected'}">
+							<li class="item #{navigationController.optionStyleHolidays}">
+								<h:outputText styleClass="text" value="#{messages['myHoliday.navigationController.substitutionSite.button']}" />
+							</li>
+						</h:panelGroup>
+						<h:link outcome="/pages/holidayview.seam"
+							rendered="#{navigationController.optionStyleHolidays != 'selected'}">
+							<li class="item #{navigationController.optionStyleHolidays}">
+								<div class="text">#{messages['myHoliday.navigationController.substitutionSite.button']}</div>
+							</li>
+						</h:link>
+					</h:panelGroup>
+      			</div>			
+			</h:form>
+		</div>
+	</ui:fragment>
+
+</ui:composition>

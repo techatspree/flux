@@ -1,0 +1,60 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/layout/application/main-template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<h:panelGroup layout="block">
+				<rich:dataTable id="holidayDataTable" var="holiday"
+					value="#{holidayListController.dataModel}">
+					
+					<rich:column id="idColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.substitution.id.title']}" />
+						</f:facet>
+						<h:outputText value="#{holiday.id}" />
+					</rich:column>
+
+					<rich:column id="userNameColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.substitution.userName.title']}" />
+						</f:facet>
+						<h:outputText value="#{holiday.applicant}" />
+					</rich:column>
+
+					<rich:column id="whoColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.substitution.who.title']}" />
+						</f:facet>
+						<h:outputText value="#{holiday.substitution}" />
+					</rich:column>
+
+					<rich:column id="fromColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText
+								value="#{messages['myHoliday.substitution.from.title']}" />
+						</f:facet>
+						<h:outputText value="#{holiday.startDate}" />
+					</rich:column>
+
+					<rich:column id="toColumn" width="150px">
+						<f:facet name="header">
+							<h:outputText value="#{messages['myHoliday.substitution.to.title']}" />
+						</f:facet>
+						<h:outputText value="#{holiday.endDate}" />
+					</rich:column>					
+				</rich:dataTable>	
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

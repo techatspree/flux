@@ -1,0 +1,507 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.akquinet</groupId>
+  <artifactId>myHoliday</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>myHoliday - jBPM Workflow Demo</name>
+  
+  <developers>
+    <developer>
+      <id>pascal.schaerf</id>
+      <name>Pascal Schaerf</name>
+      <email>pascal.schaer (at) akquinet.de</email>
+      <organization>akquinet tech@spree</organization>
+    </developer>
+
+    <developer>
+      <id>miwaszkiewicz</id>
+      <name>Marek Iwaszkiewicz</name>
+      <email>marek.iwaszkiewicz (at) akquinet.de</email>
+      <organization>akquinet tech@spree</organization>
+    </developer>
+  </developers>
+
+
+  <properties>
+    <project.version>0.0.1-SNAPSHOT</project.version>
+    <project.base.dir>${project.basedir}</project.base.dir>
+
+    <jboss-javaee6-spec.version>1.0.0.Final</jboss-javaee6-spec.version>
+    <seam.version>3.0.0.Final</seam.version>
+    <slf4j.version>1.6.1</slf4j.version>
+
+    <!-- JSF -->
+    <richfaces.version>4.0.0.Final</richfaces.version>
+    <pretty.time.version>1.0.6</pretty.time.version>
+    <prettyfaces.jsf2.version>3.2.0</prettyfaces.jsf2.version>
+
+    <!-- For tests -->
+    <junit.version>4.8.1</junit.version>
+    <hamcrest.version>1.1</hamcrest.version>
+    <easymock.version>3.0</easymock.version>
+    <hsql.version>2.2.6</hsql.version>
+
+    <!-- For persistence tests -->
+    <needle.version>2.0</needle.version>
+
+    <!-- Same as in JBoss-7.0.1 -->
+    <hibernate.version>4.0.0.Beta5</hibernate.version>
+    <hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
+
+    <seam.version>3.0.0.Final</seam.version>
+
+    <jbpm5-flux.version>0.0.1-SNAPSHOT</jbpm5-flux.version>
+
+    <!-- jBPM and Drools -->
+    <jbpm.version>5.4.0-SNAPSHOT</jbpm.version>
+    <drools.version>5.5.0-SNAPSHOT</drools.version>
+    <joda.time.version>1.6</joda.time.version>
+  </properties>
+
+  <modules>
+    <module>myHoliday-domain</module>
+    <module>myHoliday-dao</module>
+    <module>myHoliday-business</module>
+    <module>myHoliday-process</module>
+    <module>myHoliday-bootstrap</module>
+    <module>myHoliday-web</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit-dep</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- for needle -->
+      <dependency>
+        <groupId>org.easymock</groupId>
+        <artifactId>easymock</artifactId>
+        <version>${easymock.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>${hamcrest.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet.jbosscc</groupId>
+        <artifactId>jbosscc-needle</artifactId>
+        <version>${needle.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!-- Same as in JBoss 7.0.1 -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>${hibernate.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>${hibernate.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate.validator.version}</version>
+        <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.0.0.GA</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.2</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Include the JBoss' Java EE 6 APIs -->
+      <!-- JBoss distributes a complete set of Java EE 6 APIs including a Bill of Materials (BOM). A BOM specifies the versions 
+        of a "stack" (or a collection) of artifacts. We use this here so that we always get the correct versions of artifacts. Here 
+        we use the jboss-javaee-web-6.0 stack (you can read this as the JBoss stack of the Java EE 6 Web Profile APIs), and we use 
+        version 2.0.0.Beta1 which is the latest release of the stack. You can actually use this stack with any version of JBoss AS 
+        that implements Java EE 6, not just JBoss AS 7! -->
+      <dependency>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-6.0</artifactId>
+        <version>${jboss-javaee6-spec.version}</version>
+        <type>pom</type>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>${hsql.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- myHoliday Modules -->
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-bootstrap</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-domain</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-dao</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-dao</artifactId>
+        <version>${project.version}</version>
+        <type>test-jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-business</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-process</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet</groupId>
+        <artifactId>myHoliday-web</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- JSF Bibliotheken -->
+      <dependency>
+        <groupId>org.richfaces.ui</groupId>
+        <artifactId>richfaces-components-ui</artifactId>
+        <version>${richfaces.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.richfaces.core</groupId>
+        <artifactId>richfaces-core-impl</artifactId>
+        <version>${richfaces.version}</version>
+      </dependency>
+
+      <!-- Seam -->
+      <!-- Seam Solder provides convenient, portable CDI extensions such as an injectable logger -->
+      <!-- third party -->
+      <dependency>
+        <groupId>org.jboss.seam.solder</groupId>
+        <artifactId>seam-solder</artifactId>
+        <version>${seam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.persistence</groupId>
+        <artifactId>seam-persistence</artifactId>
+        <version>${seam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.faces</groupId>
+        <artifactId>seam-faces</artifactId>
+        <version>3.0.2.Final</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.security</groupId>
+        <artifactId>seam-security</artifactId>
+        <version>${seam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.config</groupId>
+        <artifactId>seam-config-xml</artifactId>
+        <version>${seam.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.catch</groupId>
+        <artifactId>seam-catch</artifactId>
+        <version>${seam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.seam.validation</groupId>
+        <artifactId>seam-validation</artifactId>
+        <version>${seam.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.ocpsoft</groupId>
+        <artifactId>ocpsoft-pretty-time</artifactId>
+        <version>${pretty.time.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.ocpsoft</groupId>
+        <artifactId>prettyfaces-jsf2</artifactId>
+        <version>${prettyfaces.jsf2.version}</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda.time.version}</version>
+      </dependency>
+
+      <!-- jbpm5-flux -->
+      <dependency>
+        <artifactId>jbpm5-flux-bpmservice</artifactId>
+        <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+        <version>${jbpm5-flux.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>jbpm5-flux-tdoservice</artifactId>
+        <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+        <version>${jbpm5-flux.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>jbpm5-flux-taskitemservice</artifactId>
+        <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+        <version>${jbpm5-flux.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+        <artifactId>jbpm5-flux-taskserver-local</artifactId>
+        <version>${jbpm5-flux.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>de.akquinet.jbosscc.jbpm5-jee6support</groupId>
+        <artifactId>jbpm5-flux-taskserver-mina</artifactId>
+        <version>${jbpm5-flux.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit-dep</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>de.akquinet.jbosscc</groupId>
+      <artifactId>jbosscc-needle</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+    </dependency>
+
+
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation processors -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+          <configuration>
+            <debug>true</debug>
+            <debuglevel>lines,vars,source</debuglevel>
+            <source>1.6</source>
+            <target>1.6</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.8.1</version>
+          <configuration>
+            <argLine>-Xmx1024m</argLine>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.1.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>test-jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Read properties that are different for every developer from build.properties file -->
+        <!-- Location of that file is configured via ${project.base.dir} in each module -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>properties-maven-plugin</artifactId>
+          <version>1.0-alpha-2</version>
+          <executions>
+            <execution>
+              <phase>initialize</phase>
+              <goals>
+                <goal>read-project-properties</goal>
+              </goals>
+              <configuration>
+                <files>
+                  <file>${project.base.dir}/build.properties</file>
+                </files>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <!-- Resolve variables in files -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+          <exclude>**/*.xml</exclude>
+          <exclude>**/.svn</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
+
+  </build>
+
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <!-- Hibernate Properties -->
+        <!--<hibernate.default_schema>public</hibernate.default_schema> -->
+        <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+        <hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
+        <!-- <hibernate.hbm2ddl.auto>create-drop</hibernate.hbm2ddl.auto> -->
+        <hibernate.show_sql>false</hibernate.show_sql>
+        <hibernate.format_sql>false</hibernate.format_sql>
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+      </properties>
+      <build>
+        <plugins>
+          <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
+          <!-- To use, set the JBOSS_HOME environment variable and run: mvn package jboss-as:deploy -->
+          <plugin>
+            <groupId>org.jboss.as.plugins</groupId>
+            <artifactId>jboss-as-maven-plugin</artifactId>
+            <version>7.0.0.Final</version>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+</project>

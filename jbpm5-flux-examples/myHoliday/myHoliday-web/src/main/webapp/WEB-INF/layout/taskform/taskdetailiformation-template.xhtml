@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+		<div id="taskFormDispalyName">
+			#{messages['myHoliday.taskform.selectedTask']}: <ui:insert name="taskFormName">taskFormName</ui:insert>
+		</div>
+		
+		<h:panelGroup id="taskInformationInputAreaGroup">
+			<ui:insert name="taskInformationInputArea">taskInformationInputArea</ui:insert>
+		</h:panelGroup>	
+		
+		<br />
+			
+		<h:panelGrid id="taskDetailIformationCloseButtonBox" columns="3" >
+			<a4j:commandButton id="closeTaskButton"
+				action="#{taskManagementController.closeTaskForm}"
+				value="#{messages['myHoliday.taskManagementController.closeTaskForm.button']}"
+				render="taskDetailIformation, taskDataTable"
+				rendered="#{taskManagementController.taskFormData.closable}">
+			</a4j:commandButton>
+			
+			<a4j:commandButton id="revokeTaskButton"
+				action="#{taskManagementController.revokeTask}"
+				value="#{messages['myHoliday.taskManagementController.revokeTask.button']}"
+				render="taskDetailIformation, taskDataTable"
+				rendered="#{taskManagementController.taskFormData.revocable}">
+			</a4j:commandButton>
+			
+			<a4j:commandButton id="completeTaskButton"
+				action="#{taskManagementController.completeTask}"
+				value="#{messages['myHoliday.taskManagementController.completeTask.button']}"
+				render="taskDetailIformation, taskDataTable">
+			</a4j:commandButton>
+		</h:panelGrid>
+</ui:composition>

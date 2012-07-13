@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/layout/application/main-template.xhtml">
+
+	<ui:define name="content">
+		<div id="login">
+			<h:form id="loginForm" >
+				<h:panelGroup layout="block">
+		
+					<h:outputText value="#{messages['myHoliday.securityController.login.title']}" style="font-weight:bold;" />
+	
+					<h:panelGroup>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{messages['myHoliday.userAccount.userName.title']}:" for="userNameInput" />
+							<h:inputText id="userNameInput" value="#{credentials.username}" required="true" style="height:20px;" 
+										 requiredMessage="#{messages['myHoliday.userAccount.userName.requiredMsg']}" />
+	
+							<h:outputLabel value="#{messages['myHoliday.userAccount.password.title']}:" for="passwordInput" />
+							<h:inputSecret id="passwordInput" value="#{credentials.password}" required="true"  redisplay="true" 
+										   requiredMessage="#{messages['myHoliday.userAccount.password.requiredMsg']}" style="height:20px;" />
+							
+							<h:outputLabel value="" />
+							<h:panelGroup layout="block" style="padding-top:5px;text-align:right">
+								<h:commandButton id="loginButton" action="#{identity.login}" value="#{messages['myHoliday.securityController.login.button']}" />
+							</h:panelGroup>
+							
+						</h:panelGrid>
+					</h:panelGroup>
+					
+					<h:panelGroup layout="block" style="padding-top:20px; font-size:smaller;" >
+						<h:outputLabel value="#{messages['myHoliday.login.demoCredentials.msg']}" style="font-weight:bold;" />
+						<div>
+							john / john	(user)
+						</div>
+						<div>
+							robert / robert	(user)	
+						</div>
+						<div>
+							gordon / gordon	(verwaltung)	
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:form>	
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>myHoliday</artifactId>
+		<groupId>de.akquinet</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>myHoliday-business</artifactId>
+	<name>myHoliday - Business Logic</name>
+	<description>myHoliday business logic</description>
+
+	<properties>
+		<project.base.dir>${project.parent.basedir}</project.base.dir>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>de.akquinet</groupId>
+			<artifactId>myHoliday-domain</artifactId>
+			<type>test-jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>de.akquinet</groupId>
+			<artifactId>myHoliday-dao</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.akquinet</groupId>
+			<artifactId>myHoliday-dao</artifactId>
+			<type>test-jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>		
+<!--       <dependency>
+      					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+					<scope>test</scope>
+      </dependency> -->
+	</dependencies>
+
+</project>
