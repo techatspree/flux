@@ -19,9 +19,9 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQueries({
-		@NamedQuery(name = UserAccount.QUERY_FIND_BY_USERNAME, query = "FROM UserAccount u WHERE u.userName = :"
+		@NamedQuery(name = UserAccount.QUERY_FIND_BY_USERNAME, query = "Select u FROM UserAccount u WHERE u.userName = :"
 				+ UserAccount.PARAM_USERNAME),
-		@NamedQuery(name = UserAccount.QUERY_FIND_BY_USERNAME_AND_PASSWORD, query = "FROM UserAccount u WHERE u.userName = :"
+		@NamedQuery(name = UserAccount.QUERY_FIND_BY_USERNAME_AND_PASSWORD, query = "Select u FROM UserAccount u WHERE u.userName = :"
 				+ UserAccount.PARAM_USERNAME
 				+ " and u.password = :"
 				+ UserAccount.PARAM_PASSWORD) })

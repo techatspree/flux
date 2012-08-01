@@ -12,7 +12,7 @@ import de.akquinet.myHoliday.domain.enums.AccountRole;
  * @author <a href="marek.iwaszkiewicz@akquinet.de">Marek Iwaszkiewicz, tech@spree GmbH</a>
  */
 @Entity
-@NamedQuery(name = UserAccountRole.QUERY_FIND_BY_ACCOUNT_ROLE, query = "FROM UserAccountRole u WHERE u.accountRole = :"
+@NamedQuery(name = UserAccountRole.QUERY_FIND_BY_ACCOUNT_ROLE, query = "Select u FROM UserAccountRole u WHERE u.accountRole = :"
 		+ UserAccountRole.PARAM_ACCOUNT_ROLE)
 public class UserAccountRole extends AbstractEntity {
 

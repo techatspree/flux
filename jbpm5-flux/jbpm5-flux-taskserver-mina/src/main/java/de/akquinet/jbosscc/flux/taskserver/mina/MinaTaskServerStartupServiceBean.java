@@ -21,7 +21,7 @@ import org.jbpm.task.service.EscalatedDeadlineHandler;
 import org.jbpm.task.service.TaskService;
 import org.jbpm.task.service.mina.MinaTaskServer;
 
-import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomUserGroupCallback;
+import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomFluxUserGroupCallback;
 
 /**
  * Klasse für die Bereitstellung des Human-Task-Services
@@ -45,7 +45,7 @@ public class MinaTaskServerStartupServiceBean implements Serializable {
 	private EntityManagerFactory emf;
 
 	@Inject
-	@CustomUserGroupCallback
+	@CustomFluxUserGroupCallback
 	private UserGroupCallback customJbpmUsergroupCallback;
 
 	private MinaTaskServer minaTaskServer;

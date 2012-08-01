@@ -21,7 +21,7 @@ import org.jbpm.task.identity.UserGroupCallback;
 import org.jbpm.task.identity.UserGroupCallbackManager;
 import org.jbpm.task.service.local.LocalTaskService;
 
-import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomUserGroupCallback;
+import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomFluxUserGroupCallback;
 
 @Named
 @ApplicationScoped
@@ -37,7 +37,7 @@ public class LocalTaskServiceDelegatorBean implements Serializable,
 	private EntityManagerFactory emf;
 
 	@Inject
-	@CustomUserGroupCallback
+	@CustomFluxUserGroupCallback
 	private UserGroupCallback customJbpmUsergroupCallback;
 
 	private LocalTaskService localTaskService;

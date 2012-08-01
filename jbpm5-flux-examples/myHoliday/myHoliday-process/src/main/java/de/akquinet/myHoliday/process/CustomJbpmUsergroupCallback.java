@@ -10,7 +10,7 @@ import javax.inject.Named;
 import org.jboss.logging.Logger;
 import org.jbpm.task.identity.UserGroupCallback;
 
-import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomUserGroupCallback;
+import de.akquinet.jbosscc.flux.bpmservice.taskservice.qualifier.CustomFluxUserGroupCallback;
 import de.akquinet.myHoliday.business.UserAccountService;
 import de.akquinet.myHoliday.business.utils.UserAccountUtils;
 import de.akquinet.myHoliday.domain.UserAccount;
@@ -24,7 +24,7 @@ import de.akquinet.myHoliday.domain.enums.AccountRole;
  * @author <a href="marek.iwaszkiewicz@akquinet.de">Marek Iwaszkiewicz, tech@spree GmbH</a>
  */
 @Named
-@CustomUserGroupCallback
+@CustomFluxUserGroupCallback
 public class CustomJbpmUsergroupCallback implements UserGroupCallback,
 		Serializable {
 
