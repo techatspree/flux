@@ -14,10 +14,10 @@
 	
 	<ui:define name="taskInformationInputArea">
 		<h:panelGrid id="userAcountDataGrid" columns="2" rendered="#{taskManagementController.taskFormData.accepted}">
-			<h:outputText value="Urlaub:" />
-			<h:outputText value="JA" />
+			<h:outputText value="#{messages['myHoliday.taskform.confirmAnswer.holiday.title']}:" />
+			<h:outputText value="#{messages['myHoliday.taskform.confirmAnswer.ok.title']}" />
 					
-			<h:outputText value="Start:" />
+			<h:outputText value="#{messages['myHoliday.taskform.confirmAnswer.start.title']}:" />
 			<rich:calendar value="#{taskManagementController.taskFormData.holiday.startDate}" readonly="true"
 				locale="de/DE"
 				popup="true"
@@ -26,7 +26,7 @@
 				showApplyButton="true"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>		
 			
-			<h:outputText value="Ende:" />
+			<h:outputText value="#{messages['myHoliday.taskform.confirmAnswer.end.title']}:" />
 			<rich:calendar value="#{taskManagementController.taskFormData.holiday.endDate}" readonly="true"
 				locale="de/DE"
 				popup="true"
@@ -35,7 +35,7 @@
 				showApplyButton="true"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>
 			
-			<h:outputText value="Dauer:" />
+			<h:outputText value="#{messages['myHoliday.taskform.confirmAnswer.duration.title']}:" />
 			<h:inputText value="#{taskManagementController.taskFormData.time}" readonly="true" />				
 		</h:panelGrid>
 		

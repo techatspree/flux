@@ -14,7 +14,7 @@
 	
 	<ui:define name="taskInformationInputArea">
 		<h:panelGrid id="userAcountDataGrid" columns="2">
-			<h:outputText value="Start:" />
+			<h:outputText value="#{messages['myHoliday.taskform.requestForLeave.start.title']}:" />
 			<rich:calendar id="dateinput1" value="#{taskManagementController.taskFormData.startDate}"  
 				locale="de/DE"
 				popup="true"
@@ -23,7 +23,7 @@
 				showApplyButton="true"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>	
 			
-			<h:outputText value="Ende:" />
+			<h:outputText value="#{messages['myHoliday.taskform.requestForLeave.end.title']}:" />
 			<rich:calendar id="dateinput2" value="#{taskManagementController.taskFormData.endDate}" 
 				locale="de/DE"
 				popup="true"

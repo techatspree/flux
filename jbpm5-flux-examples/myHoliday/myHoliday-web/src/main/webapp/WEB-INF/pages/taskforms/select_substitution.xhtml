@@ -20,26 +20,26 @@
 			<h:outputText value="#{messages['myHoliday.userAccount.firstName.title']}:" />
 			<h:outputText value="#{userAccountUtilController.getFirstName(taskManagementController.taskFormData.holiday.applicant)}" />
 						
-			<h:outputText value="Start:" />
+			<h:outputText value="#{messages['myHoliday.taskform.selectSubstitution.start.title']}:" />
 			<rich:calendar value="#{taskManagementController.taskFormData.holiday.startDate}" readonly="true" 
 				locale="#{calendarController.locale}"
 				popup="#{calendarController.popup}"
 				datePattern="#{calendarController.pattern}"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>
 			
-			<h:outputText value="Ende:" />
+			<h:outputText value="#{messages['myHoliday.taskform.selectSubstitution.end.title']}:" />
 			<rich:calendar value="#{taskManagementController.taskFormData.holiday.endDate}" readonly="true" 
 				locale="#{calendarController.locale}"
 				popup="#{calendarController.popup}"
 				datePattern="#{calendarController.pattern}"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>						
 
-			<h:outputText value="Dauer:" />
+			<h:outputText value="#{messages['myHoliday.taskform.selectSubstitution.duration.title']}:" />
 			<h:inputText value="#{taskManagementController.taskFormData.time}" readonly="true" />
 						
-			<h:outputText value="#{messages['myHoliday.taskform.input.vertretung']}" />
+			<h:outputText value="#{messages['myHoliday.taskform.selectSubstitution.substitution.title']}" />
 			<h:selectOneMenu id="vertretungSelect" value="#{taskManagementController.taskFormData.holiday.substitution}">
-				<f:selectItem itemValue="#{null}" itemLabel="Bitte waehlen" noSelectionOption="true" />
+				<f:selectItem itemValue="#{null}" itemLabel="#{messages['myHoliday.taskform.selectSubstitution.select.title']}" noSelectionOption="true" />
 				<f:selectItems value="#{userAccountUtilController.getUserAccountList(taskManagementController.taskFormData.holiday.applicant)}"
 				var="_user" itemValue="#{_user.userName}" itemLabel="#{_user.lastName}" />
 			</h:selectOneMenu>							

@@ -20,7 +20,7 @@
 			<h:outputText value="#{messages['myHoliday.userAccount.firstName.title']}:" />
 			<h:outputText value="#{userAccountUtilController.getFirstName(taskManagementController.taskFormData.applicant)}" />	
 			
-			<h:outputText value="Start:" />
+			<h:outputText value="#{messages['myHoliday.taskform.checkRequestForLeave.start.title']}:" />
 			<rich:calendar id="dateinput1" value="#{taskManagementController.taskFormData.startDate}"  
 				locale="de/DE"
 				popup="true"
@@ -29,7 +29,7 @@
 				showApplyButton="true"                     
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>		
 			
-			<h:outputText value="Ende:" />
+			<h:outputText value="#{messages['myHoliday.taskform.checkRequestForLeave.end.title']}:" />
 			<rich:calendar value="#{taskManagementController.taskFormData.endDate}" readonly="true" 
 				locale="#{calendarController.locale}"
 				popup="#{calendarController.popup}"
@@ -37,8 +37,8 @@
 				cellWidth="24px" cellHeight="22px" style="width:200px"/>
 			
 			<h:selectOneMenu id="accept" value="#{taskManagementController.taskFormData.accepted}" >
-				<f:selectItem id="item1" itemLabel="OK" itemValue="true" />
-				<f:selectItem id="item2" itemLabel="nicht OK" itemValue="false" />
+				<f:selectItem id="item1" itemLabel="#{messages['myHoliday.taskform.checkRequestForLeave.accepted.ok.itemlabel']}" itemValue="true" />
+				<f:selectItem id="item2" itemLabel="#{messages['myHoliday.taskform.checkRequestForLeave.accepted.notok.itemlabel']}" itemValue="false" />
 			</h:selectOneMenu>									
 		</h:panelGrid>
 	</ui:define>
