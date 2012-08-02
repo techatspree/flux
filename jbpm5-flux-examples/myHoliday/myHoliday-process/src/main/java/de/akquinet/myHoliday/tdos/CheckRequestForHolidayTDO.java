@@ -9,8 +9,8 @@ import de.akquinet.jbosscc.flux.tdoservice.tdos.AbstractTaskDataObject;
  * @author <a href="mailto:pascal.schaerf@akquinet.de">Pascal Schaerf, tech@spree GmbH</a>
  * @author <a href="marek.iwaszkiewicz@akquinet.de">Marek Iwaszkiewicz, tech@spree GmbH</a>
  */
-@Tdo(task = "check request for leave", form = "check_request_for_leave")
-public class CheckRequestForLeaveTDO extends AbstractTaskDataObject {
+@Tdo(task = "check request for holiday", form = "check_request_for_holiday")
+public class CheckRequestForHolidayTDO extends AbstractTaskDataObject {
 
 	private static final long serialVersionUID = 1L;
 

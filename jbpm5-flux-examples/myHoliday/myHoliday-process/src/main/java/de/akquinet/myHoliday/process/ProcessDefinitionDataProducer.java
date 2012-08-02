@@ -20,7 +20,7 @@ public class ProcessDefinitionDataProducer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// Name der Prozessdefinition
-	private final String processDefinitionFileName = "requestForLeave.bpmn";
+	private final String processDefinitionFileName = "requestForHoliday.bpmn";
 
 	@Produces
 	@BpmnResource

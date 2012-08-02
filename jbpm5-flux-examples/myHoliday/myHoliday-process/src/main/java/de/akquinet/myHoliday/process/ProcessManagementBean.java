@@ -21,7 +21,7 @@ public class ProcessManagementBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String PROCESS_DEFINITION_ID = "de.akquinet.myholiday.requestForLeave";
+	private static final String PROCESS_DEFINITION_ID = "de.akquinet.myholiday.requestForHoliday";
 
 	public static final String PARAM_USERNAME = "applicant";
 
